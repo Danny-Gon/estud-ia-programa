@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estud-IA · Qué es el programa</title>
+<meta name="description" content="Guía simple del programa Estud-IA 2026 de Medellín: las tres capas de formación, las seis líneas, los requisitos y cómo se obtiene el certificado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<header class="portada">
+  <div class="contenedor">
+    <p class="sobretitulo">Secretaría de Desarrollo Económico · Medellín</p>
+    <h1 class="logotipo">
+      <img src="img/estud-ia.png" alt="Estud-IA" width="900" height="166">
+      <span class="anio">2026</span>
+    </h1>
+    <p class="bajada" id="resumen"></p>
+    <p class="acciones-portada">
+      <a class="boton" href="#capas">Cómo funciona</a>
+      <a class="boton secundario" href="#requisitos">¿Puedo participar?</a>
+    </p>
+  </div>
+</header>
+
+<nav class="indice" aria-label="Secciones">
+  <div class="contenedor fila-indice">
+    <a href="#capas">Las tres capas</a>
+    <a href="#lineas">Las seis líneas</a>
+    <a href="#requisitos">Quién puede entrar</a>
+    <a href="#extras">Qué más incluye</a>
+    <a href="#certificacion">Certificación</a>
+  </div>
+</nav>
+
+<main id="contenido">
+
+  <section class="seccion">
+    <div class="contenedor">
+      <ul class="rejilla-metas" id="metas"></ul>
+      <p class="pie-metas">Metas del programa para 2026, según el Anexo Técnico.</p>
+    </div>
+  </section>
+
+  <!-- ---------- Las tres capas ---------- -->
+  <section class="seccion alterna" id="capas">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Las tres capas</h2>
+      <p class="intro-seccion">
+        El programa es una escalera. Se entra por donde corresponda según lo
+        que ya sepas, y cada peldaño habilita el siguiente.
+      </p>
+      <ol class="escalera" id="escalera"></ol>
+    </div>
+  </section>
+
+  <!-- ---------- Las seis líneas ---------- -->
+  <section class="seccion" id="lineas">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Las seis líneas</h2>
+      <p class="intro-seccion">
+        Son las seis áreas que el Estudio de Empleabilidad y Talento Digital en
+        Colombia 2025–2030 señala con mayor demanda sin cubrir. Cada línea
+        recorre Capa 1 y Capa 2.
+      </p>
+      <div class="rejilla-lineas-grande" id="lineas-grande"></div>
+      <p class="estado oculto" id="error"><span id="error-detalle"></span></p>
+    </div>
+  </section>
+
+  <!-- ---------- Requisitos ---------- -->
+  <section class="seccion alterna" id="requisitos">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="req-titulo"></h2>
+      <p class="destacado" id="req-entrada"></p>
+      <div class="dos-columnas">
+        <ul class="lista-chulos" id="req-lista"></ul>
+        <aside class="aparte" id="req-nota"></aside>
+      </div>
+      <div class="inscripcion" id="inscripcion"></div>
+    </div>
+  </section>
+
+  <!-- ---------- Transversales ---------- -->
+  <section class="seccion" id="extras">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Además de lo técnico</h2>
+      <p class="intro-seccion">
+        La formación técnica no va sola. Estas cuatro piezas la acompañan
+        durante todo el recorrido.
+      </p>
+      <div class="rejilla-extras" id="extras-lista"></div>
+    </div>
+  </section>
+
+  <!-- ---------- Certificación ---------- -->
+  <section class="seccion alterna" id="certificacion">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="cert-titulo"></h2>
+      <p class="destacado" id="cert-regla"></p>
+      <dl class="definiciones" id="cert-puntos"></dl>
+      <aside class="aparte" id="cert-nota"></aside>
+    </div>
+  </section>
+
+  <!-- ---------- Catálogo ---------- -->
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="llamado" id="llamado"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie-sitio">
+  <div class="contenedor">
+    <div class="pie-marcas">
+      <img class="sello" src="img/alcaldia-medellin.png"
+           alt="Alcaldía de Medellín · Distrito de Ciencia, Tecnología e Innovación"
+           width="420" height="320">
+      <div>
+        <p>Estud-IA 2026 · Secretaría de Desarrollo Económico, Distrito Especial de Medellín.</p>
+        <p class="menudo">
+          Resumen informativo elaborado a partir del Anexo Técnico del programa.
+          Ante cualquier diferencia, prevalece el documento oficial.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="programa.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var P = window.PROGRAMA;
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Todo texto pasa por aquí antes de entrar al DOM.
+  function esc(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function plural(n, uno, varios) {
+    return n + ' ' + (n === 1 ? uno : varios);
+  }
+
+  /* ---- Carga de cursos: igual que en el catálogo ----
+     fetch('cursos.json') y, si falla (file:// bloquea fetch por CORS),
+     el espejo cursos.js. Solo se usa para CONTAR cursos por línea, nunca
+     para describirlos: así esta página no puede contradecir al catálogo. */
+  function cargarCursos() {
+    return fetch('cursos.json')
+      .then(function (r) {
+        if (!r.ok) { throw new Error('HTTP ' + r.status); }
+        return r.json();
+      })
+      .catch(function () {
+        return new Promise(function (resolver, rechazar) {
+          if (window.__CURSOS__) { return resolver(window.__CURSOS__); }
+          var s = document.createElement('script');
+          s.src = 'cursos.js';
+          s.onload = function () {
+            if (window.__CURSOS__) { resolver(window.__CURSOS__); }
+            else { rechazar(new Error('cursos.js no definió los datos.')); }
+          };
+          s.onerror = function () {
+            rechazar(new Error('No se encontró cursos.json ni cursos.js.'));
+          };
+          document.head.appendChild(s);
+        });
+      });
+  }
+
+  /* ---- Lo que no depende de los cursos se pinta de inmediato ---- */
+
+  $('resumen').textContent = P.resumen;
+
+  $('metas').innerHTML = P.metas.map(function (m) {
+    return '<li class="meta"><b>' + esc(m.valor) + '</b>' +
+           '<span>' + esc(m.etiqueta) + '</span></li>';
+  }).join('');
+
+  var R = P.requisitos;
+  $('req-titulo').textContent = R.titulo;
+  $('req-entrada').textContent = R.entrada;
+  $('req-lista').innerHTML = R.lista.map(function (t) {
+    return '<li>' + esc(t) + '</li>';
+  }).join('');
+  $('req-nota').innerHTML = '<p>' + esc(R.nota) + '</p>';
+
+  if (R.inscripcion) {
+    // rel="noopener" porque abre en una pestaña nueva, en otro dominio.
+    $('inscripcion').innerHTML =
+      '<a class="boton grande" href="' + esc(R.inscripcion.url) + '"' +
+      ' target="_blank" rel="noopener">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+          '<path d="M13.5 10.5 10 14a2.8 2.8 0 1 0 4 4l5-5a4.5 4.5 0 0 0-6.4-6.4l-5.6 5.6a6 6 0 0 0 8.5 8.5"' +
+          ' stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg>' +
+        esc(R.inscripcion.texto) +
+      '</a>' +
+      (R.inscripcion.pie
+        ? '<p class="pie-inscripcion">' + esc(R.inscripcion.pie) + '</p>'
+        : '');
+  }
+
+  $('extras-lista').innerHTML = P.transversales.map(function (t) {
+    return '<article class="extra">' +
+             '<h3>' + esc(t.titulo) + '</h3>' +
+             '<p>' + esc(t.texto) + '</p>' +
+           '</article>';
+  }).join('');
+
+  var C = P.certificacion;
+  $('cert-titulo').textContent = C.titulo;
+  $('cert-regla').textContent = C.regla;
+  $('cert-puntos').innerHTML = C.puntos.map(function (p) {
+    return '<dt>' + esc(p[0]) + '</dt><dd>' + esc(p[1]) + '</dd>';
+  }).join('');
+  $('cert-nota').innerHTML = '<p>' + esc(C.nota) + '</p>';
+
+  $('llamado').innerHTML =
+    '<h2>¿Quieres ver los cursos uno por uno?</h2>' +
+    '<p>' + esc(P.catalogo.texto) + '</p>' +
+    '<p><a class="boton" href="' + esc(P.catalogo.url) + '">Ir al catálogo de cursos</a></p>';
+
+  /* ---- Lo que sí depende de los cursos ---- */
+
+  function escalon(capa, cursos) {
+    var n = cursos.filter(function (c) { return c.capa === capa.numero; }).length;
+
+    var filas = capa.datos.map(function (d) {
+      return '<div class="fila-dato"><dt>' + esc(d[0]) + '</dt>' +
+             '<dd>' + esc(d[1]) + '</dd></div>';
+    }).join('');
+
+    var cuantos = capa.sinCatalogo
+      ? '<p class="sin-catalogo">' + esc(capa.cierre) + '</p>'
+      : '<p class="cuantos"><b>' + plural(n, 'curso disponible', 'cursos disponibles') +
+        '</b>, tres por cada línea de formación.</p>' +
+        '<p class="sin-catalogo">' + esc(capa.cierre) + '</p>';
+
+    return '' +
+      '<li class="escalon capa-' + capa.numero + '">' +
+        '<div class="escalon-cabeza">' +
+          '<span class="etiqueta-capa capa-' + capa.numero + '">Capa ' + capa.numero + '</span>' +
+          '<h3>' + esc(capa.nombre) + '</h3>' +
+          '<p class="lema">' + esc(capa.lema) + '</p>' +
+          '<p class="para">' + esc(capa.para) + '</p>' +
+        '</div>' +
+        '<div class="escalon-cuerpo">' +
+          '<p>' + esc(capa.descripcion) + '</p>' +
+          '<dl class="datos-capa">' + filas + '</dl>' +
+          cuantos +
+        '</div>' +
+      '</li>';
+  }
+
+  function tarjetaLinea(cat, cursos) {
+    var info = P.lineas[cat] || { nombre: cat, texto: '' };
+    var n1 = cursos.filter(function (c) { return c.capa === 1; }).length;
+    var n2 = cursos.filter(function (c) { return c.capa === 2; }).length;
+    return '' +
+      '<article class="linea-grande cat-' + esc(cat) + '">' +
+        '<span class="barra" aria-hidden="true"></span>' +
+        '<h3>' + esc(info.nombre) + '</h3>' +
+        '<p>' + esc(info.texto) + '</p>' +
+        '<p class="conteo-linea">' +
+          '<span><b>' + n1 + '</b> cursos en Capa 1</span>' +
+          '<span><b>' + n2 + '</b> cursos en Capa 2</span>' +
+        '</p>' +
+      '</article>';
+  }
+
+  cargarCursos().then(function (doc) {
+    var cursos = (doc && doc.cursos) || [];
+    if (!cursos.length) { throw new Error('El archivo cargó, pero no contiene cursos.'); }
+
+    $('escalera').innerHTML = P.capas.map(function (c) {
+      return escalon(c, cursos);
+    }).join('');
+
+    // Las líneas salen del orden de PROGRAMA.lineas, pero solo las que
+    // existen de verdad en los datos.
+    var presentes = Object.keys(P.lineas).filter(function (cat) {
+      return cursos.some(function (c) { return c.categoria === cat; });
+    });
+    cursos.forEach(function (c) {
+      if (presentes.indexOf(c.categoria) === -1) { presentes.push(c.categoria); }
+    });
+
+    $('lineas-grande').innerHTML = presentes.map(function (cat) {
+      return tarjetaLinea(cat, cursos.filter(function (c) { return c.categoria === cat; }));
+    }).join('');
+
+  }).catch(function (err) {
+    // Si fallan los cursos, las capas se pintan igual sin el conteo.
+    $('escalera').innerHTML = P.capas.map(function (c) {
+      return escalon(c, []);
+    }).join('');
+    $('error').classList.remove('oculto');
+    $('error-detalle').textContent =
+      'No se pudo cargar el detalle de los cursos: ' + err.message;
+  });
+
+})();
+</script>
+
+</body>
+</html>

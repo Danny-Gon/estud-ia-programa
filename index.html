@@ -51,11 +51,13 @@
   <!-- ---------- Las tres capas ---------- -->
   <section class="seccion alterna" id="capas">
     <div class="contenedor">
-      <h2 class="titulo-seccion">Las tres capas</h2>
-      <p class="intro-seccion">
-        El programa es una escalera. Se entra por donde corresponda según lo
-        que ya sepas, y cada peldaño habilita el siguiente.
-      </p>
+      <div class="banda">
+        <h2 class="titulo-seccion">Las tres capas</h2>
+        <p class="entrada-banda">
+          El programa es una escalera. Se entra por donde corresponda según lo
+          que ya sepas, y cada peldaño habilita el siguiente.
+        </p>
+      </div>
       <ol class="escalera" id="escalera"></ol>
     </div>
   </section>
@@ -63,12 +65,14 @@
   <!-- ---------- Las seis líneas ---------- -->
   <section class="seccion" id="lineas">
     <div class="contenedor">
-      <h2 class="titulo-seccion">Las seis líneas</h2>
-      <p class="intro-seccion">
-        Son las seis áreas que el Estudio de Empleabilidad y Talento Digital en
-        Colombia 2025–2030 señala con mayor demanda sin cubrir. Cada línea
-        recorre Capa 1 y Capa 2.
-      </p>
+      <div class="banda">
+        <h2 class="titulo-seccion">Las seis líneas</h2>
+        <p class="entrada-banda">
+          Son las seis áreas que el Estudio de Empleabilidad y Talento Digital en
+          Colombia 2025–2030 señala con mayor demanda sin cubrir. Cada línea
+          recorre Capa 1 y Capa 2.
+        </p>
+      </div>
       <div class="rejilla-lineas-grande" id="lineas-grande"></div>
       <p class="estado oculto" id="error"><span id="error-detalle"></span></p>
     </div>
@@ -77,8 +81,10 @@
   <!-- ---------- Requisitos ---------- -->
   <section class="seccion alterna" id="requisitos">
     <div class="contenedor">
-      <h2 class="titulo-seccion" id="req-titulo"></h2>
-      <p class="destacado" id="req-entrada"></p>
+      <div class="banda">
+        <h2 class="titulo-seccion" id="req-titulo"></h2>
+        <p class="entrada-banda" id="req-entrada"></p>
+      </div>
       <div class="dos-columnas">
         <ul class="lista-chulos" id="req-lista"></ul>
         <aside class="aparte" id="req-nota"></aside>
@@ -91,10 +97,6 @@
   <section class="seccion" id="extras">
     <div class="contenedor">
       <h2 class="titulo-seccion">Además de lo técnico</h2>
-      <p class="intro-seccion">
-        La formación técnica no va sola. Estas cuatro piezas la acompañan
-        durante todo el recorrido.
-      </p>
       <div class="rejilla-extras" id="extras-lista"></div>
     </div>
   </section>
@@ -102,8 +104,10 @@
   <!-- ---------- Certificación ---------- -->
   <section class="seccion alterna" id="certificacion">
     <div class="contenedor">
-      <h2 class="titulo-seccion" id="cert-titulo"></h2>
-      <p class="destacado" id="cert-regla"></p>
+      <div class="banda">
+        <h2 class="titulo-seccion" id="cert-titulo"></h2>
+        <p class="entrada-banda" id="cert-regla"></p>
+      </div>
       <dl class="definiciones" id="cert-puntos"></dl>
       <aside class="aparte" id="cert-nota"></aside>
     </div>
@@ -214,8 +218,21 @@
         : '');
   }
 
-  $('extras-lista').innerHTML = P.transversales.map(function (t) {
+  var ICONOS_EXTRA = [
+    'M4 6h16M4 12h10M4 18h7',                                   // inglés: líneas de texto
+    'M12 13.5a4 4 0 1 0-4-4M7.5 20.5a6.5 6.5 0 0 1 13 0',       // habilidades: persona
+    'M12 3.5 20 18H4ZM12 9.5v4M12 15.8v.6',                     // alertas: triángulo
+    'M8 9.5a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2Z' +
+      'M16.5 19.5a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2Z' +
+      'M10.2 8.2l4.1 7.1'                                       // comunidad: red
+  ];
+
+  $('extras-lista').innerHTML = P.transversales.map(function (t, i) {
     return '<article class="extra">' +
+             '<svg class="ico-extra" viewBox="0 0 24 24" aria-hidden="true">' +
+               '<path d="' + ICONOS_EXTRA[i % ICONOS_EXTRA.length] + '"' +
+               ' stroke-linecap="round" stroke-linejoin="round"/>' +
+             '</svg>' +
              '<h3>' + esc(t.titulo) + '</h3>' +
              '<p>' + esc(t.texto) + '</p>' +
            '</article>';
@@ -253,8 +270,10 @@
     return '' +
       '<li class="escalon capa-' + capa.numero + '">' +
         '<div class="escalon-cabeza">' +
-          '<span class="etiqueta-capa capa-' + capa.numero + '">Capa ' + capa.numero + '</span>' +
-          '<h3>' + esc(capa.nombre) + '</h3>' +
+          '<span class="numeral" aria-hidden="true">' +
+            String(capa.numero).padStart(2, '0') + '</span>' +
+          '<h3><span class="solo-lectores">Capa ' + capa.numero + ': </span>' +
+            esc(capa.nombre) + '</h3>' +
           '<p class="lema">' + esc(capa.lema) + '</p>' +
           '<p class="para">' + esc(capa.para) + '</p>' +
         '</div>' +

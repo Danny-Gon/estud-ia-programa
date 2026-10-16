@@ -1257,3 +1257,94 @@ a { color: var(--marca); }
 @media (max-width: 620px) {
   .boton.grande { width: 100%; justify-content: center; font-size: 16px; }
 }
+
+/* =====================================================================
+   Menos rótulos, más estructura visual
+   ===================================================================== */
+
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* El título y su entrada dejan de apilarse: van lado a lado, como una
+   sola banda. En móvil vuelven a apilarse, que ahí es lo natural. */
+.banda {
+  display: grid;
+  grid-template-columns: minmax(200px, 300px) 1fr;
+  gap: 16px 44px;
+  align-items: start;
+  margin-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.banda .titulo-seccion { margin: 0; }
+
+.banda .entrada-banda {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--texto-suave);
+  padding-top: 3px;
+}
+
+/* Fuera de la banda, el título lleva una barra de color en lugar de un
+   párrafo que lo explique. */
+.seccion > .contenedor > .titulo-seccion {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 26px;
+}
+
+.seccion > .contenedor > .titulo-seccion::before {
+  content: '';
+  flex: none;
+  width: 26px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--marca);
+}
+
+/* Numeral grande: anuncia la capa sin necesitar un rótulo aparte. */
+.numeral {
+  display: block;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: var(--franja, var(--marca));
+  margin-bottom: 10px;
+}
+
+.escalon-cabeza h3 { margin-top: 0; }
+
+/* Icono por pieza: el título deja de ser lo único que las distingue. */
+.ico-extra {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
+  stroke: var(--marca);
+  fill: none;
+  stroke-width: 1.6;
+}
+
+@media (max-width: 760px) {
+  .banda {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+  }
+  .banda .entrada-banda { font-size: 15.5px; padding-top: 0; }
+  .numeral { font-size: 36px; }
+}
